@@ -8,8 +8,6 @@ def A_star_tile_heuristic(root: Problem) -> bool:
     while(True):
         #if frontier is empty then there is no solution, return false
         if not frontier: 
-            #test print
-            print("frontier is empty!\n")
             return False
         
         #pick node with lowest cost to move to
@@ -28,7 +26,7 @@ def A_star_tile_heuristic(root: Problem) -> bool:
         #add lowest cost node to explored set
         explored_set.append(lowest_cost_node)
 
-        print("Best state to expand with the cost of " + str(lowest_cost) + " is: \n")
+        print("Best state to expand with the cost of " + str(lowest_cost) + " and a node cost of " + str(lowest_cost_node.cost) +  " is: \n")
         print(lowest_cost_node.__str__())
         print("\n")
 
@@ -42,6 +40,7 @@ def A_star_tile_heuristic(root: Problem) -> bool:
             #expands node by moving tile and returns true if it is a goal state after moving
             new_tiles = lowest_cost_node.initial_state
             chosen_node = Problem(new_tiles)
+            chosen_node.cost = lowest_cost_node.cost
 
             curr_x = 0
             curr_y = 0
@@ -84,15 +83,10 @@ def A_star_tile_heuristic(root: Problem) -> bool:
             exists = False
             for to_be_expanded in frontier:
                 if temp.initial_state == to_be_expanded.initial_state:
-                    #test print
-                    print("Expanded problem state already is in frontier!\n")
-                    print("x is equal to" + str(x))
                     exists = True
             for expanded in explored_set:
                 #test print
                 if temp.initial_state == expanded.initial_state:
-                    #test print
-                    print("Expanded problem state is already in explored set!\n")
                     exists = True
 
             #if child node was NOT seen before AND was created from a legal move, add to frontier
@@ -149,7 +143,8 @@ while algo_choice not in {1, 2, 3}:
     except ValueError:
         ...
 
-if A_star_tile_heuristic(problem):
-    print("Solution found!")
-else:
-    print("No solution found!")
+if algo_choice==1:
+    if A_star_tile_heuristic(problem):
+        print("Solution found!")
+    else:
+        print("No solution found!")
