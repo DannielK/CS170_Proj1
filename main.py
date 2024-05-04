@@ -1,5 +1,16 @@
 from problem import Problem
 
+
+def custom_puzzle() -> Problem:
+    print("Enter your puzzle, use a zero to represent the blank")
+    row1 = input("Enter the first row, use a space between numbers    ")
+    row2 = input("Enter the second row, use a space between numbers   ")
+    row3 = input("Enter the third row, use a space between numbers    ")
+
+    tiles = [list(map(int, row.split(" "))) for row in (row1, row2, row3)]
+    return Problem(tiles)
+
+
 print("Welcome to XXX (change this to your student ID) 8 puzzle solver.")
 
 puzzle_type = 0
@@ -10,13 +21,7 @@ while puzzle_type not in {1, 2}:
     except ValueError:
         ...
 
-print("Enter your puzzle, use a zero to represent the blank")
-row1 = input("Enter the first row, use a space between numbers    ")
-row2 = input("Enter the second row, use a space between numbers   ")
-row3 = input("Enter the third row, use a space between numbers    ")
-
-tiles = [list(map(int, row.split(" "))) for row in (row1, row2, row3)]
-problem = Problem(tiles)
+problem = Problem.default() if puzzle_type == 1 else custom_puzzle()
 
 algo_choice = 0
 prompt = """\nEnter your choice of algorithm

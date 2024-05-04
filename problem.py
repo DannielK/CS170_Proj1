@@ -12,6 +12,10 @@ class Problem:
     def is_done(self) -> None:
         return self.current_state == self.goal_state
 
+    @classmethod
+    def default(cls) -> None:
+        return cls([[1, 2, 3], [4, 8, 0], [7, 6, 5]])
+
     def move_tile_up(self, pos_x: int, pos_y: int) -> bool:
         tile = self.current_state[pos_x][pos_y]
 
