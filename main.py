@@ -15,7 +15,7 @@ def custom_puzzle() -> Problem:
     return Problem(tiles)
 
 # intro
-print("Welcome to dkim481, spaul030, jkim1247, akang048, and ttsen017's 8 puzzle solver.")
+print("Welcome to group 27's 8 puzzle solver.")
 
 puzzle_type = 0
 prompt = "Type “1” to use a default puzzle, or “2” to enter your own puzzle.\n"
@@ -51,8 +51,8 @@ while algo_choice not in algo_functions:
 solution = algo_functions[algo_choice](problem)
 if solution:
     print("Goal!!!\n\n"
-          "To solve this problem the search algorithm expanded a total of " + solution[0] + " nodes.\n"
-          "The maximum number of nodes in the queue at any one time: " + solution[1] + ".\n"
-          "The depth of the goal node was " + solution[2] + ".\n")
+          "To solve this problem the search algorithm expanded a total of " + str(solution[0]) + " nodes.\n"
+          "The maximum number of nodes in the queue at any one time: " + str(solution[1]) + ".\n"
+          "The depth of the goal node was " + str(solution[2]) + ".\n")
 else:
     print("No solution.")
