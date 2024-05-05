@@ -11,7 +11,7 @@ def euclidean_distance(point1, point2):
 
 # find the goal position of a tile with a given value
 def find_tile_goal_position(node: Problem, value):
-    for i, row in enumerate(node.initial_state):
+    for i, row in enumerate(node.goal_state):
         for j in range(len(row)):
             if node.goal_state[i][j] == value:
                 return i, j
@@ -54,14 +54,15 @@ def astar_euclidean(initial: Problem):
     # list of strictly states in frontier
     frontier_states = {dupe_state: 0}
     # max length of queue at any time
-    max_queue = 0
+    max_queue = 1
     # depth of goal node
     sol_depth = 0
 
     while(True):
         # if frontier is empty then return failure
         if not frontier:
-            return False
+            sol_depth = -1
+            return len(expanded_set), max_queue, sol_depth
 
         # choose a leaf node and remove it from frontier
         node = copy.deepcopy(heapq.heappop(frontier))
