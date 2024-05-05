@@ -55,6 +55,7 @@ def astar_misplaced(initial: Problem):
     while(True):
         # if frontier is empty then return failure
         if not frontier:
+            sol_depth = -1
             return len(expanded_set), max_queue, sol_depth
 
         # choose a leaf node and remove it from frontier
