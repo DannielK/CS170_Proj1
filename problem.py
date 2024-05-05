@@ -34,7 +34,7 @@ class Problem:
         # in the given direction so we check if its >= 0
         # and if the new pos is empty
         new_row = row - 1
-        if new_row < 0 or self.initial_state[new_row][col] != 0:
+        if new_row < 0 or new_row==2 or self.initial_state[new_row][col] != 0:
             raise MoveError(tile, "up")
 
         problem = copy.deepcopy(self)
@@ -56,7 +56,7 @@ class Problem:
         # in the given direction so we check if its <= 2
         # and if the new pos is empty
         new_row = row + 1
-        if new_row > 2 or self.initial_state[new_row][col] != 0:
+        if new_row > 2 or new_row==0 or self.initial_state[new_row][col] != 0:
             raise MoveError(tile, "down")
 
         problem = copy.deepcopy(self)
@@ -78,7 +78,7 @@ class Problem:
         # in the given direction so we check if its >= 0
         # and if the new pos is empty
         new_col = col - 1
-        if new_col < 0 or self.initial_state[row][new_col] != 0:
+        if new_col < 0 or new_col==2 or self.initial_state[row][new_col] != 0:
             raise MoveError(tile, "left")
 
         problem = copy.deepcopy(self)
@@ -100,7 +100,7 @@ class Problem:
         # in the given direction so we check if its <= 2
         # and if the new pos is empty
         new_col = col + 1
-        if new_col > 2 or self.initial_state[row][new_col] != 0:
+        if new_col > 2 or new_col ==0 or  self.initial_state[row][new_col] != 0:
             raise MoveError(tile, "right")
 
         problem = copy.deepcopy(self)
