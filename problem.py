@@ -6,12 +6,17 @@ import copy
 class Problem:
     def __init__(self, initial_state: list[list[int]]) -> None:
         self.initial_state = initial_state
-        self.cost = 0
+        self.g_n = 0
+        self.h_n = 0
+        self.f_n = 0
         self.goal_state = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
 
     @property
     def is_done(self) -> None:
         return self.initial_state == self.goal_state
+
+    def __lt__(self, other):
+        return self.f_n < other.f_n
 
     @classmethod
     def default(cls) -> None:
