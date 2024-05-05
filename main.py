@@ -55,4 +55,6 @@ if solution:
           "The maximum number of nodes in the queue at any one time: " + str(solution[1]) + ".\n"
           "The depth of the goal node was " + str(solution[2]) + ".\n")
 else:
-    print("No solution.")
+    print("No solution.\n\n"
+          "The algorithm expanded a total of " + str(solution[0]) + " nodes.\n"
+          "The maximum number of nodes in the queue at any one time: " + str(solution[1]) + ".\n")
