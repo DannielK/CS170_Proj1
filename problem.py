@@ -6,12 +6,17 @@ import copy
 class Problem:
     def __init__(self, initial_state: list[list[int]]) -> None:
         self.initial_state = initial_state
-        self.cost = 0
+        self.g_n = 0
+        self.h_n = 0
+        self.f_n = 0
         self.goal_state = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
 
     @property
     def is_done(self) -> None:
         return self.initial_state == self.goal_state
+
+    def __lt__(self, other):
+        return self.f_n < other.f_n
 
     @classmethod
     def default(cls) -> None:
@@ -19,9 +24,9 @@ class Problem:
 
     def __str__(self) -> str:
         return (
-            f"<Problem state={self.initial_state[0]}\n"
-            f"               {self.initial_state[1]}\n"
-            f"               {self.initial_state[2]}>"
+            f"Problem state = {self.initial_state[0]}\n"
+            f"                {self.initial_state[1]}\n"
+            f"                {self.initial_state[2]}"
         )
 
     def move_tile_up(self, row: int, col: int) -> Problem:
@@ -34,7 +39,9 @@ class Problem:
         # in the given direction so we check if its >= 0
         # and if the new pos is empty
         new_row = row - 1
-        if new_row < 0 or self.initial_state[new_row][col] != 0:
+
+
+        if new_row < 0 or new_row == 2 or self.initial_state[new_row][col] != 0:
             raise MoveError(tile, "up")
 
         problem = copy.deepcopy(self)
@@ -42,7 +49,7 @@ class Problem:
         # Change the position of the tile
         problem.initial_state[new_row][col] = tile
         problem.initial_state[row][col] = 0
-        problem.cost += 1
+        problem.g_n += 1
 
         return problem
 
@@ -56,7 +63,7 @@ class Problem:
         # in the given direction so we check if its <= 2
         # and if the new pos is empty
         new_row = row + 1
-        if new_row > 2 or self.initial_state[new_row][col] != 0:
+        if new_row > 2 or new_row == 0 or self.initial_state[new_row][col] != 0:
             raise MoveError(tile, "down")
 
         problem = copy.deepcopy(self)
@@ -64,7 +71,7 @@ class Problem:
         # Change the position of the tile
         problem.initial_state[new_row][col] = tile
         problem.initial_state[row][col] = 0
-        problem.cost += 1
+        problem.g_n += 1
 
         return problem
 
@@ -78,7 +85,7 @@ class Problem:
         # in the given direction so we check if its >= 0
         # and if the new pos is empty
         new_col = col - 1
-        if new_col < 0 or self.initial_state[row][new_col] != 0:
+        if new_col < 0 or new_col == 2 or self.initial_state[row][new_col] != 0:
             raise MoveError(tile, "left")
 
         problem = copy.deepcopy(self)
@@ -86,7 +93,7 @@ class Problem:
         # Change the position of the tile
         problem.initial_state[row][new_col] = tile
         problem.initial_state[row][col] = 0
-        problem.cost += 1
+        problem.g_n += 1
 
         return problem
 
@@ -100,7 +107,7 @@ class Problem:
         # in the given direction so we check if its <= 2
         # and if the new pos is empty
         new_col = col + 1
-        if new_col > 2 or self.initial_state[row][new_col] != 0:
+        if new_col > 2 or new_col == 0 or self.initial_state[row][new_col] != 0:
             raise MoveError(tile, "right")
 
         problem = copy.deepcopy(self)
@@ -108,7 +115,7 @@ class Problem:
         # Change the position of the tile
         problem.initial_state[row][new_col] = tile
         problem.initial_state[row][col] = 0
-        problem.cost += 1
+        problem.g_n += 1
 
         return problem
 
@@ -131,4 +138,4 @@ if __name__ == "__main__":
     problem = Problem(lst)
     assert problem.is_done == False
 
-    print(problem.move_tile_up(2, 2).cost)
+    print(problem.move_tile_up(2, 2).g_n)
