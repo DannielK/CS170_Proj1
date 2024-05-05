@@ -1,7 +1,7 @@
 # import the problem along with the 3 algorithms
 from problem import Problem
-#from uniform_cost import uniform_cost
-#from astar_misplaced import astar_misplaced
+from uniform_cost import uniform_cost
+from astar_misplaced import astar_misplaced
 from astar_euclidean import astar_euclidean
 
 # prompt user for the initial state of problem
@@ -29,8 +29,8 @@ problem = Problem.default() if puzzle_type == 1 else custom_puzzle()
 
 # list of algorithms
 algo_functions = {
-    #1: uniform_cost,
-    #2: astar_misplaced,
+    1: uniform_cost,
+    2: astar_misplaced,
     3: astar_euclidean
 }
 
