@@ -20,7 +20,7 @@ def heuristic(node: Problem):
             if element == 0:
                 continue
             goal_row, goal_col = find_tile_goal_position(node, element)
-            if element != node.goal_state[goal_row][goal_col]:
+            if (i, j) != (goal_row, goal_col):
                 h_n += 1
     # cost to goal from state
     f_n = g_n + h_n
